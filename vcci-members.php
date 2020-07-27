@@ -52,13 +52,13 @@ function vcci_members_setup_post_type() {
             'menu_position'       => 5,
             'menu_icon'           => 'dashicons-admin-multisite',
             'capability_type'   => 'post',
-           
             'hierarchical'        => false,
             'supports'            => [ 'title', 'editor', 'thumbnail', 'excerpt' ], 
             'has_archive'         => false,
             'query_var'           => true,
         ] );
 } 
+}
 add_action( 'init', 'vcci_members_setup_post_type' );
  
  
@@ -86,4 +86,3 @@ function vcci_members_deactivate() {
 
 register_deactivation_hook( __FILE__ , 'vcci_members_deactivate' );
 
-?>
