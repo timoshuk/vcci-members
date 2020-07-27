@@ -16,12 +16,16 @@
 
 
 
+//  https://developer.wordpress.org/plugins/security/nonces/
+
+
 if(!defined("WPINC")){
     die;
 }
 
 
- /**
+
+/**
  * Register the "book" custom post type
  */
 function vcci_members_setup_post_type() {
