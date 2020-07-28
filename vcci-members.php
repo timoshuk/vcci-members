@@ -16,7 +16,7 @@
 
 
 
-//  https://developer.wordpress.org/plugins/security/nonces/
+//  https://developer.wordpress.org/plugins/hooks/
 
 
 if(!defined("WPINC")){
