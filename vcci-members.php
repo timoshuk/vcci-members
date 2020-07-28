@@ -25,11 +25,12 @@ if(!defined("WPINC")){
 
 
 
+
 /**
  * Register the "book" custom post type
  */
 function vcci_members_setup_post_type() {
-    function register_post_types(){
+    
         register_post_type( 'vcci_members', [
             'label'  => null,
             'labels' => [
@@ -58,7 +59,7 @@ function vcci_members_setup_post_type() {
             'query_var'           => true,
         ] );
 } 
-}
+
 add_action( 'init', 'vcci_members_setup_post_type' );
  
  
@@ -85,4 +86,3 @@ function vcci_members_deactivate() {
 } 
 
 register_deactivation_hook( __FILE__ , 'vcci_members_deactivate' );
-
