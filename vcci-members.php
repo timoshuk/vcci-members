@@ -63,6 +63,7 @@ function vcci_members_setup_post_type() {
 add_action( 'init', 'vcci_members_setup_post_type' );
 
 require plugin_dir_path( __FILE__ ) . 'includes/metabox.php';
+require plugin_dir_path( __FILE__ ) . 'includes/custom-search.php';
  
 /**
  * Activate the plugin.
