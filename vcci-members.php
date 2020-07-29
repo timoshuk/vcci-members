@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       VcciMembers
  * Description:       Плагін додає тип запису Члени ТПП для виводу на сторінці членської бази
- * Version:           0.0.1
+ * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Oleksandr Timoshchuk
@@ -23,7 +23,7 @@ if(!defined("WPINC")){
     die;
 }
 
-
+define( 'PLUGIN_NAME_VERSION', '1.0.0' );
 
 
 /**
@@ -32,36 +32,37 @@ if(!defined("WPINC")){
 function vcci_members_setup_post_type() {
     
         register_post_type( 'vcci_members', [
-            'label'  => null,
             'labels' => [
-                'name'               => 'Члени ВТПП',
-                'singular_name'      => 'Член ВТПП', 
-                'add_new'            => 'Додати Члена', 
-                'add_new_item'       => 'Додавання Члена', 
-                'edit_item'          => 'Редагувати запис', 
-                'new_item'           => 'Новий запис', 
-                'view_item'          => 'Переглянути запис',
-                'search_items'       => 'Шукати Запис', 
-                'not_found'          => 'Данних запису не знайдено', 
-                'not_found_in_trash' => 'В смітнику нічого не знайдено', 
-                'menu_name'          => 'VCCI_Members', 
+                'name'               => esc_html__('Члени ВТПП', 'vcci_members'),
+                'singular_name'      => esc_html__('Член ВТПП', 'vcci_members'), 
+                'add_new'            => esc_html__('Додати Члена', 'vcci_members'), 
+                'add_new_item'       => esc_html__('Додавання Члена', 'vcci_members'), 
+                'edit_item'          => esc_html__('Редагувати запис', 'vcci_members'), 
+                'new_item'           => esc_html__('Новий запис', 'vcci_members'), 
+                'view_item'          => esc_html__('Переглянути запис','vcci_members'),
+                'search_items'       => esc_html__('Шукати Запис', 'vcci_members'), 
+                'not_found'          => esc_html__('Данних запису не знайдено', 'vcci_members'), 
+                'not_found_in_trash' => esc_html__('В смітнику нічого не знайдено', 'vcci_members'), 
+                'menu_name'          => esc_html__('VCCI_Members', 'vcci_members'), 
             ],
-            'description'         => 'Список членів Волинської ТПП',
+            'description'         => esc_html__('Список членів Волинської ТПП', 'vcci_members'),
             'public'              => true,
             'show_in_menu'        => true, 
-            'show_in_rest'        => true, 
             'menu_position'       => 5,
             'menu_icon'           => 'dashicons-admin-multisite',
             'capability_type'   => 'post',
             'hierarchical'        => false,
-            'supports'            => [ 'title', 'editor', 'thumbnail', 'excerpt' ], 
+            'supports'            => [ 'title', 'editor', 'thumbnail'], 
             'has_archive'         => false,
             'query_var'           => true,
+            'publicly_queryable'  => false,
+            'register_meta_box_cb' => 'vcci_members_add_event_metaboxes',
         ] );
 } 
 
 add_action( 'init', 'vcci_members_setup_post_type' );
- 
+
+require plugin_dir_path( __FILE__ ) . 'includes/metabox.php';
  
 /**
  * Activate the plugin.
@@ -71,6 +72,7 @@ function vcci_members_activate() {
     vcci_members_setup_post_type(); 
     // Clear the permalinks after the post type has been registered.
     flush_rewrite_rules(); 
+    
 }
 register_activation_hook( __FILE__, 'vcci_members_activate' );
 
@@ -86,3 +88,11 @@ function vcci_members_deactivate() {
 } 
 
 register_deactivation_hook( __FILE__ , 'vcci_members_deactivate' );
+
+
+add_action( 'wp_enqueue_scripts', 'vcci_members_add_assets' );
+
+function vcci_members_add_assets(){
+    
+   wp_enqueue_style( 'vcci_members', plugin_dir_url( __FILE__ ) . 'assets/css/vcci-members.css', [], '1.0.1' );
+}
