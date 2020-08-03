@@ -28,6 +28,10 @@ global $wpdb;
     }
     $vcci_prefix = get_table_prefix();
 
-$wpdb->query("DELETE FROM '$vcci_prefix . _posts' WHERE post_type = 'vcci_members'");
-$wpdb->query("DELETE FROM '$vcci_prefix . _postmeta' WHERE post_id NOT IN (SELECT id FROM wp_posts)");
-$wpdb->query("DELETE FROM '$vcci_prefix . _term_relationships' WHERE object_id NOT IN (SELECT id FROM wp_posts)");
+    $vcci_post_table = $vcci_prefix . '_posts';
+    $vcci_postmeta_table = $vcci_prefix . '_postmeta';
+    $vcci_post_term_table = $vcci_prefix . '_term_relationships';
+
+$wpdb->query("DELETE FROM $vcci_post_table WHERE post_type = 'vcci_members'");
+$wpdb->query("DELETE FROM $vcci_postmeta_table WHERE post_id NOT IN (SELECT id FROM wp_posts)");
+$wpdb->query("DELETE FROM $vcci_post_term_table WHERE object_id NOT IN (SELECT id FROM wp_posts)");
