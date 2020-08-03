@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       VcciMembers
  * Description:       Плагін додає тип запису Члени ТПП для виводу на сторінці членської бази
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Oleksandr Timoshchuk
@@ -23,7 +23,7 @@ if(!defined("WPINC")){
     die;
 }
 
-define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'PLUGIN_NAME_VERSION', '1.0.1' );
 
 
 /**
